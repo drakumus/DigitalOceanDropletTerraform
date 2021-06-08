@@ -14,7 +14,7 @@ provider "digitalocean" {
 
 resource "digitalocean_ssh_key" "default" {
   name       = "General Accessor"
-  public_key = var.public_ssh_key
+  public_key = base64decode(var.public_ssh_key)
 }
 
 # need variables do_token, private_key for this to work
@@ -31,7 +31,7 @@ resource "digitalocean_droplet" "web" {
   #    host = self.ipv4_address
   #    user = "root"
   #    type = "ssh"
-  #    private_key = var.private_ssh_key
+  #    private_key = base64decode(var.private_ssh_key)
   #    timeout = "10m"
   #  }
   #  provisioner "remote-exec" {
