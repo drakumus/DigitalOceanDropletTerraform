@@ -2,7 +2,7 @@
 Terraform for a project server on Digital Ocean.
 Brings up an instance of terraform and creates a mobaxterm session file to allow for connection via ssh by simply double clicking.
 
-# *.auto.terraform files not included
+# *.auto.terraform file not included
 
 **do_token** = string api token from digital ocean see - https://cloud.digitalocean.com/account/api/
 
