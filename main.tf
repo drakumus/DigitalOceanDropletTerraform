@@ -45,6 +45,46 @@ resource "digitalocean_droplet" "web" {
   #  }
 }
 
+resource "digitalocean_domain" "default" {
+  name = "zoci.me"
+}
+
+# Add an A record to the domain for www.example.com.
+resource "digitalocean_record" "A" {
+  domain = digitalocean_domain.default.name
+  type   = "A"
+  name   = "@"
+  value  = digitalocean_droplet.web.ipv4_address
+}
+
+resource "digitalocean_record" "www" {
+  domain = digitalocean_domain.default.name
+  type   = "A"
+  name   = "www"
+  value  = digitalocean_droplet.web.ipv4_address
+}
+
+# provider "google-beta" {
+#   project     = "zoci-me"
+#   credentials = var.google_service_account_key
+# }
+# 
+# resource "google_dns_managed_zone" "parent-zone" {
+#   provider = google-beta
+#   name        = "dns-zone"
+#   dns_name    = "dns-zone.zoci.me."
+#   description = "My website"
+# }
+# 
+# resource "google_dns_record_set" "resource-recordset" {
+#   provider = google-beta
+#   managed_zone = google_dns_managed_zone.parent-zone.name
+#   name         = "record.dns-zone.zoci.me."
+#   type         = "A"
+#   rrdatas      = [digitalocean_droplet.web.ipv4_address]
+#   ttl          = 900
+# }
+
 
 # Generate a mobaxterm session file for the above droplet
 resource "local_file" "ssh_session_file" {
@@ -62,9 +102,9 @@ resource "digitalocean_project" "Personal" {
 }
 
 module "website_ssh_info_distributor" {
-  github_token = var.github_token
-  source = "./modules/ssh_info_distributor"
+  github_token    = var.github_token
+  source          = "./modules/ssh_info_distributor"
   repository_name = "website"
-  ssh_ip_address = digitalocean_droplet.web.ipv4_address
-  ssh_private_key = file(var.public_ssh_key) # for future ref: file function returns a string
+  ssh_ip_address  = digitalocean_droplet.web.ipv4_address
+  ssh_private_key = file(var.private_ssh_key) # for future ref: file function returns a string
 }

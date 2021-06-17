@@ -10,6 +10,8 @@ Brings up an instance of terraform and creates a mobaxterm session file to allow
 
 **public_ssh_key** = public ssh key i.e. ./path/to/file/ida_pub.ssh used to give droplet a public key for ssh connection
 
+**github_token** = A github token with permissions to read and write packages as well as read repositories.
+
 Example:
 
 ```

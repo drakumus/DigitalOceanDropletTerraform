@@ -10,12 +10,12 @@ data "github_actions_public_key" "website_key" {
 
 resource "github_actions_secret" "ssh_ip_address" {
   repository = var.repository_name
-  secret_name = "ssh_ip_address"
+  secret_name = "SSH_IP_ADDRESS"
   plaintext_value = var.ssh_ip_address
 }
 
 resource "github_actions_secret" "ssh_private_key" {
   repository = var.repository_name
-  secret_name = "ssh_private_key"
+  secret_name = "SSH_PRIVATE_KEY"
   plaintext_value = var.ssh_private_key
 }
