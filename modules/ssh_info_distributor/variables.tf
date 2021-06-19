@@ -2,6 +2,10 @@ variable "github_token" {
   type = string
 }
 
+variable "github_repo_ship_it" {
+  type = string
+}
+
 variable "repository_name" {
   type = string
 }

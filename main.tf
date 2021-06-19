@@ -102,9 +102,19 @@ resource "digitalocean_project" "Personal" {
 }
 
 module "website_ssh_info_distributor" {
-  github_token    = var.github_token
-  source          = "./modules/ssh_info_distributor"
-  repository_name = "website"
-  ssh_ip_address  = digitalocean_droplet.web.ipv4_address
-  ssh_private_key = file(var.private_ssh_key) # for future ref: file function returns a string
+  github_token        = var.github_token
+  github_repo_ship_it = var.github_repo_ship_it
+  source              = "./modules/ssh_info_distributor"
+  repository_name     = "website"
+  ssh_ip_address      = digitalocean_droplet.web.ipv4_address
+  ssh_private_key     = file(var.private_ssh_key) # for future ref: file function returns a string
+}
+
+module "shadow_realm_discord_bot_ssh_info_distributor" {
+  github_token        = var.github_token
+  github_repo_ship_it = var.github_repo_ship_it
+  source              = "./modules/ssh_info_distributor"
+  repository_name     = "ShadowRealmDiscordBot"
+  ssh_ip_address      = digitalocean_droplet.web.ipv4_address
+  ssh_private_key     = file(var.private_ssh_key) # for future ref: file function returns a string
 }
